@@ -11,7 +11,7 @@ Below are some of the features offered:
 - Automatic grading of submitted answers based on NLP.
 - Personalized feedbacks and analytics after exams.
 - Assignment facility available for pratice.
-- Mock exam also available for pratice.
+- Mock exam also available for practice.
 - Google enhanced search also available within for learning purposes.
 
 ## Setup
