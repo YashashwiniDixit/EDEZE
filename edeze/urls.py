@@ -28,7 +28,7 @@ urlpatterns = [
     path('demo/',demo),
     path('login/',login),
     path('logout/',logout),
-
+    
     path('adminIndex/',adminIndex),
     path('addTeacher/',addTeacher),
     path('addAdmin/',addAdmin),
