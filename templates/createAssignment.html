@@ -14,6 +14,7 @@
         <div class="row align-items-center" style="justify-content:space-around">
           <div style="text-align: center;" class="col-lg-5" data-aos="fade-up" data-aos-delay="500">
             <h1>Create an Assignment</h1>
+            <div class="gcse-searchbox-only"></div>
             <form action="/createAssignment/{{ course_id }}" method="post" class="form-box">{% csrf_token %}
               <h3 class="h4 text-black mb-4">Create Assignment</h3>
               <div class="form-group">
@@ -41,32 +42,13 @@
                 <input type="submit" class="btn btn-primary btn-pill" value="Create" required>
               </div>
             </form>
-
           </div>
         </div>
       </div>
 
     </div>
   </div>
-  </div>
-  </div>
-  </form>
 
-  <div style="border: 1px solid blue;">
-    Type to Search
-    <div class="gcse-searchbox-only"></div>
-  </div>
+
 </body>
 {% endblock %}
-
-<!--
-<head>
-<script async src="https://cse.google.com/cse.js?cx=31248725b3a0d1f8e"></script>
-</head>
-<body>
-  <div style="border: 1px solid blue;">
-  Type to Search
-  <div class="gcse-searchbox-only"></div>
-</div>
-</body>
--->
