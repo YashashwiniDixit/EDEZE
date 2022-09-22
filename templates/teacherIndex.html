@@ -53,7 +53,7 @@
       var wrapper3 = document.createElement('div');
       var wrapper4 = document.createElement('div');
       var cnt = getCount();
-      wrapper1.innerHTML = '<div ><h4>Question ' + cnt + '</h4>\n' +
+      wrapper1.innerHTML = '<div><h5>Question ' + cnt + '</h5>\n' +
         '            <input name="question_' + cnt + '" type = "text"  placeholder="Enter Question">\n' +
         '            <select name="type_' + cnt + '" onchange="getAnswer(this)">\n' +
         '                <option name="true_false">True/False</option>\n' +
@@ -64,12 +64,12 @@
         '            </select>\n' +
         '        </div>';
 
-      wrapper2.innerHTML = '<div name="answer_' + cnt + '"><h4>Answer</h4>\n' +
+      wrapper2.innerHTML = '<div name="answer_' + cnt + '" style="margin: 5px;"><h5>Answer</h5>\n' +
         '            <input type="radio" name="true_false_ans_' + cnt + '" value="True">True\n' +
         '            <input type="radio" name="true_false_ans_' + cnt + '" value="False">False\n' +
         '        </div>';
 
-      wrapper3.innerHTML = '<div name="mks_' + cnt + '"><h4>Marks</h4>\n' +
+      wrapper3.innerHTML = '<div name="mks_' + cnt + '"><h5>Marks</h5>\n' +
         '            <input type="text" name="marks_' + cnt + '" onchange="setTotalMks(this)">' +
         '        </div>';
       wrapper4.innerHTML = '<div>Course outcomes (Enter comma separated outcomes)\n' +
@@ -80,7 +80,8 @@
       var mks = wrapper3.firstChild;
       var course_outcomes = wrapper4.firstChild;
       var newDiv = document.createElement('div');
-      newDiv.className = "form-box";
+      newDiv.className = "form-control";
+      newDiv.style = "text-align: left;height: auto; margin-bottom:5px;"
       newDiv.append(question);
       newDiv.append(answer);
       newDiv.append(mks);
