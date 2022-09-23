@@ -16,29 +16,15 @@
   }
 </style>
 <!--countdown function is called when page is loaded -->
-<div class="site-section courses-title" id="courses-section" style="position: relative;top: 40px;height: 200px;">
-  <div class="container">
-    <div class="row mb-5 justify-content-center">
-      <div class="col-lg-7 text-center" data-aos="fade-up" data-aos-delay="">
-        <h2 class="section-title">Grade the Exam</h2>
-      </div>
-    </div>
+<div class="site-section" style="position: relative;top: 40px;height: 200px;color: #fff;">
+  <div class="col-lg-7 text-center" data-aos="fade-up">
+    <h2>Grade the Exam</h2>
   </div>
 </div>
 <div class="site-wrap">
-  <div class="site-mobile-menu site-navbar-target">
-    <div class="site-mobile-menu-header">
-      <div class="site-mobile-menu-close mt-3">
-        <span class="icon-close2 js-menu-toggle"></span>
-      </div>
-    </div>
-    <div class="site-mobile-menu-body"></div>
-  </div>
   <div class="intro-section" id="home-section">
-
     <div data-stellar-background-ratio="0.5">
       <div class="container">
-
         <form action="/gradeManual/{{ exam_id }}-{{ student_id }}" method="post" class="form-box">{% csrf_token %}
           <div class="row align-items-center">
             {% for q in questions %}
@@ -71,10 +57,6 @@
       </div>
     </div>
   </div>
-
-
-
-
 </div>
 
 
