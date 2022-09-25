@@ -17,7 +17,7 @@
 </style>
 <!--countdown function is called when page is loaded -->
 <div class="site-section" style="position: relative;top: 40px;height: 200px;color: #fff;">
-  <div class="col-lg-7 text-center" data-aos="fade-up">
+  <div class="text-center" data-aos="fade-up">
     <h2>Grade the Exam</h2>
   </div>
 </div>
@@ -29,21 +29,21 @@
           <div class="row align-items-center">
             {% for q in questions %}
             <div class="col-lg-12 form-box">
-              <div class="form-control" id="'ques_no'+{{ q.0 }}">.&nbsp;{{ q.1 }}</div>
+              <div class="form-control" id="'ques_no'+{{ q.0 }}">{{ q.0 }}.&nbsp;{{ q.1 }}</div>
               <script type="text/javascript">
                 var c = getcount();
                 var qele = document.getElementById("'ques_no'+{{ q.0 }}");
                 qele.innerText = c + qele.innerText;
               </script>
-              <div class="form-control">Marks: {{ q.5}}</div>
               {% if q.4 == 'Short Answer' or q.4 == 'Descriptive Answer' %}
-              Student's answer : <div class="answer-descriptive" id="'ans_'+{{ q.0 }}" style="color:#000;">{{ q.3 |safe
-                | escape}}</div>
+              Student's answer : <div class="answer-descriptive" id="'ans_'+{{ q.0 }}" style="color:#000;">{{ q.3 |safe|
+                escape}}</div>
               {% else %}
-              Student's answer : <div>{{ q.3|safe|escape }}</div>
+              <div>Student's answer : {{ q.3|safe|escape }}</div>
               {% endif %}
               <div>Actual Answer: {{ q.2 }}</div>
-              Obtained Marks:<input type="text" name="marks_{{ q.6 }}" class="form-control" value="{{ q.7 }}">
+              Obtained Marks: (out of {{q.5}})<input type="text" name="marks_{{ q.6 }}" class="form-control"
+                value="{{ q.7 }}">
               Feedback:<textarea name="feedback_{{ q.6 }}" placeholder="enter feedback"
                 class="form-control">{{ q.8 }}</textarea>
               {# q.id,q.question,q.answer,qs.answer,q.type,q.marks,qs.id q->actual,qs->student#}
