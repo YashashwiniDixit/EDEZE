@@ -279,7 +279,6 @@ def giveAccess(request,course_id):
     cur.execute(query, (request.session['teacher_id']))
     classes = cur.fetchall()
     cur.close()
-    print(classes[-1][0])
     return render(request,'giveAccess.html',{'classes':classes,'course_id':course_id})
 
 
