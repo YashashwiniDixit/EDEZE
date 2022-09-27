@@ -1,16 +1,49 @@
 {% extends 'studentIndex.html' %}
 {% block content %}
-    <form action="/submitAssignment/{{ assignment.0 }}" method="post" enctype="multipart/form-data">{% csrf_token %}
-        <div>Title - {{ assignment.1 }}</div>
-        <div>Max Size(MB) - {{ assignment.2 }}</div>
-        <input type="text" name="no_of_attachments" value="{{ assignment.3 }}" hidden>
-        <div>Max No.of attachments - {{ assignment.3 }}</div>
-        <div>Due Date - {{ assignment.5 }}</div>
+<div class="intro-section" id="home-section">
 
-            {% for i in a %}
-                Upload <input type="file" name="file_{{ i }}">
-            {% endfor %}
+    <div class="slide-1" style="background-image: url('../static/images/hero_1.jpg');"
+        data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="row align-items-center" style="justify-content: space-around;">
+                <div style="text-align: center;" data-aos="fade-up" data-aos-delay="500">
+                    <form action="/submitAssignment/{{ assignment.0 }}" method="post" enctype="multipart/form-data"
+                        class="form-box">
+                        {%csrf_token%}
+                        <table style="text-align: left; margin-bottom: 5px;">
+                            <tr>
+                                <th>Title</th>
+                                <th style="padding-left: 10px;">{{ assignment.1 }}</th>
+                            </tr>
+                            <tr>
+                                <th>Max. Size (MB)</th>
+                                <th style="padding-left: 10px;">{{ assignment.2 }}</th>
+                            </tr>
+                            <tr>
+                                <th>Max. No. of Attachments</th>
+                                <th style="padding-left: 10px;">{{ assignment.3 }}</th>
+                            </tr>
+                            <tr>
+                                <th>Due Date</th>
+                                <th style="padding-left: 10px;">{{ assignment.5 }}</th>
+                            </tr>
+                            {% for i in a %}
+                            <tr>
+                                <td>Upload File No. {{i}}</td>
+                                <td><input type="file" name="file_{{ i }}"></td>
+                            </tr>
+                            {% endfor %}
 
-        <input type="submit" value="Submit">
-    </form>
+                        </table>
+
+                        <div class="form-group" style="align-items: center;margin-top: 20px">
+                            <input type="submit" class="btn btn-primary btn-pill" value="Submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 {% endblock %}

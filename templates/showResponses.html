@@ -36,8 +36,9 @@
                 qele.innerText = c + qele.innerText;
               </script>
               {% if q.4 == 'Short Answer' or q.4 == 'Descriptive Answer' %}
-              Student's answer :
-              <div class="answer-descriptive" id="'ans_'+{{ q.0 }}" style="color:#000;">{{ q.3|safe }}
+
+              <div class="answer-descriptive" id="'ans_'+{{ q.0 }}" style="color:#000;">
+                Student's answer : {{ q.3|safe}}
               </div>
               {% else %}
               <div>Student's answer : {{ q.3|safe|escape }}</div>
