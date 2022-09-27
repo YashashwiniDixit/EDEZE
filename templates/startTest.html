@@ -1,50 +1,53 @@
-{#<!DOCTYPE html>#}
-{#<html lang="en">#}
-{#<head>#}
-{#    <meta charset="UTF-8">#}
-{#    <title>Test window</title>#}
-{#</head>#}
-{#<body>#}
-{#<p>Instructions for exam</p>#}
-{#<p>{{ exam.2 }}</p>#}
-{#<ul>#}
-{#    <li>don't cheat</li>#}
-{#    <li>but even if you don't people will</li>#}
-{#    <li>so take your decision wisely</li>#}
-{#    <li>contact ***** for more details on cheating</li>#}
-{#</ul>#}
-{#<p>No of questions:{{ exam.3 }}</p>#}
-{#<p>Total Marks: {{ exam.4 }}</p>#}
-{#<p>total time {{ exam.5 }}</p>#}
-{#<p>due on {{ exam.6 }}</p>#}
-{##}
-{#{% if exam.6 <=  datetime %}#}
-{#<button><a href = '/test/{{ exam_id }}'>Start Test</a> </button>#}
-{#{% endif %}#}
-{#</body>#}
-{#</html>#}
-
 {% extends "studentIndex.html" %}
 {% block content %}
 
-    <div class="site-section courses-title" id="courses-section" style="position: relative;top: 40px;height: 1000px;">
-      <div class="container">
-        <div class="row mb-5 justify-content-center">
-          <div class="col-lg-7 text-center" data-aos="fade-up" data-aos-delay="">
-            <h2 class="section-title">Exam: {{ exam.0 }}</h2>
-            <h2 class="section-title">Course Name: {{ exam.1 }}</h2>
-            <h3 style="color: WHITE">Instructions</h3>
-              <p style="color:red;font-weight: bolder"><b>{{ exam.2 }}</b></p>
-              <p style="color:WHITE;">No.of Questions - {{ exam.3 }}</p>
-              <p style="color:WHITE;">Total Marks: {{ exam.4 }}</p>
-              <p style="color:WHITE;">Total Time: {{ exam.5 }}</p>
-              <p style="color:WHITE;">Due on {{ exam.6 }}</p>
-              {% if  exam.6 <=  datetime%}
-                  <button class="btn btn-primary py-3 px-5 btn-pill" style="background: WHITE"> <a href = '/test/{{ exam_id }}'><span style="color: BLACK">Start Test</span></a> </button>
-              {% endif %}
-          </div>
+
+
+<div class="site-section courses-title" id="courses-section" style="position: relative;top: 40px;height: 1000px;">
+  <div class="container">
+    <div class="row mb-5 align-items-center justify-content-center">
+      <div class="col-lg-7 text-center" data-aos="fade-up" data-aos-delay="">
+        <div class="form-box">
+          <table style="text-align: left; margin-bottom: 5px;">
+            <tr>
+              <th>Exam: </th>
+              <th style="padding-left: 10px;">{{ exam.0 }}</th>
+            </tr>
+            <tr>
+              <th>Course Name: </th>
+              <th style="padding-left: 10px;">{{ exam.1 }}</th>
+            </tr>
+            <tr>
+              <td>No. of Questions: </td>
+              <td style="padding-left: 10px;">{{exam.3}}</td>
+            </tr>
+            <tr>
+              <td>Total Marks: </td>
+              <td style="padding-left: 10px;">{{exam.4}}</td>
+            </tr>
+            <tr>
+              <td>Total Time: </td>
+              <td style="padding-left: 10px;">{{exam.5}}</td>
+            </tr>
+            <tr>
+              <td>Due on </td>
+              <td style="padding-left: 10px;">{{exam.6}}</td>
+            </tr>
+            <tr>
+              <td>Instructions: </td>
+              <td style="color:red;font-weight: bolder;padding-left: 10px;">{{exam.2}}</td>
+            </tr>
+          </table>
+          {% if exam.6 <= datetime%} <button class="btn btn-primary py-3 px-5 btn-pill">
+            <a href='/test/{{ exam_id }}'>
+              <span style="color: BLACK">Start Test</span>
+            </a>
+            </button>
+            {% endif %}
         </div>
       </div>
     </div>
+  </div>
+</div>
 
 {% endblock %}
