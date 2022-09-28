@@ -10,7 +10,7 @@ Below are some of the features offered:
 - Exam supports multiple types of questions (objective and subjective with rich editor).
 - Automatic grading of submitted answers based on NLP.
 - Personalized feedbacks and analytics after exams.
-- Assignment facility available for pratice.
+- Assignment facility available for practice.
 - Mock exam also available for practice.
 - Google enhanced search also available within for learning purposes.
 
