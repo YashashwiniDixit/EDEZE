@@ -151,9 +151,8 @@
         function getType(ele, options, type) {
 
             ele = document.getElementById(ele);
-            console.log(ele);
-            console.log(options);
-            console.log(type);
+            options = JSON.parse(options);
+
             switch (type) {
                 case 'True/False':
                     ele.innerHTML = 'Answer: ' + '\n' +
@@ -162,10 +161,10 @@
                     break;
                 case 'MCQ':
                     ele.innerHTML = 'Answer: ' + '\n' +
-                        ' <input class = "form-control" type="radio" id= "option1_' + cnt + '"name="mcq_ans_' + cnt + '" value =' + options[1] + '>' + options[1] + '\n' +
-                        ' <input class = "form-control" type="radio" id= "option2_' + cnt + '"name="mcq_ans_' + cnt + '" value =' + options[2] + '>' + options[2] + '<br>\n' +
-                        ' <input class = "form-control" type="radio" id= "option3_' + cnt + '"name="mcq_ans_' + cnt + '" value =' + options[3] + '>' + options[3] + '<br>\n' +
-                        ' <input class = "form-control" type="radio" id= "option4_' + cnt + '"name="mcq_ans_' + cnt + '" value =' + options[4] + '>' + options[4] + '\n';
+                        ' <div style="display:flex; flex-direction:row;"> <input type="radio" id= "option1_' + cnt + '"name="mcq_ans_' + cnt + '" value =' + options[1] + '>' + options[1] + '\n  </div >' +
+                        ' <div style="display:flex; flex-direction:row;"> <input type="radio" id= "option2_' + cnt + '"name="mcq_ans_' + cnt + '" value =' + options[2] + '>' + options[2] + '<br>\n  </div >' +
+                        ' <div style="display:flex; flex-direction:row;"> <input type="radio" id= "option3_' + cnt + '"name="mcq_ans_' + cnt + '" value =' + options[3] + '>' + options[3] + '<br>\n  </div >' +
+                        ' <div style="display:flex; flex-direction:row;"> <input type="radio" id= "option4_' + cnt + '"name="mcq_ans_' + cnt + '" value =' + options[4] + '>' + options[4] + '\n  </div >';
                     break;
                 case 'One Word Answer':
                     ele.innerHTML = 'Answer: ' + '\n' +
@@ -234,11 +233,13 @@
                 <form action="/submitTest/{{ exam_id }}" method="post" class="form-box">{% csrf_token %}
 
                     <div style="display: flex;align-items: center;flex-direction: column;">
+
                         {% for q in questions %}
                         <div class="col-lg-12 align-items-center justify-content-center" style="margin:5px">
                             <div class="row align-items-center">
                                 <div class="col-lg-12 center" style="border-style: solid;border-color: #17a2b8;">
                                     <div style="display: flex;flex-direction:row;justify-content:space-between">
+
                                         <div id="'ques_no'+{{ q.0 }}">.&nbsp;{{ q.1 }}</div>
                                         <div>({{q.3}})</div>
                                     </div>
@@ -250,7 +251,7 @@
                                     </script>
                                     <div id="{{ q.0 }}+ '_' +{{ q.4 }}"></div>
                                     <script type="text/javascript">
-                                        getType("{{ q.0 }}+ '_' +{{ q.4 }}", "{{q.2}}", '{{ q.4 }}');
+                                        getType("{{ q.0 }}+ '_' +{{ q.4 }}", '{{q.2 | safe | escape}}', '{{ q.4 }}');
                                     </script>
                                 </div>
                             </div>

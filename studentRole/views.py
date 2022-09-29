@@ -27,8 +27,10 @@ def courseForStudents(request,course_id):
 
 def submitAssignment(request,assignment_id):
     if request.method == 'POST':
+        print("hello",request.POST)
         student_id = request.session['student_id']
-        no_of_attachments = int(request.POST.get('no_of_attachments'))
+        assignment = getAssignment(assignment_id)
+        no_of_attachments = int(assignment[3])
         file_paths = {}
         for i in range(1,no_of_attachments+1):
             try:
@@ -45,7 +47,7 @@ def submitAssignment(request,assignment_id):
         assignment = getAssignment(assignment_id)
         no_of_attachments = int(assignment[3])
         a = [str(i+1) for i in range(no_of_attachments)]
-        print(a)
+        print("bye",a)
         return render(request,'submitAssignment.html',{'assignment':assignment,'a':a})
 
 def testEditor(request):
