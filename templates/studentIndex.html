@@ -1,59 +1,33 @@
-{#{% load static %}#}
-{#<!DOCTYPE html>#}
-{#<html lang="en">#}
-{#<head>#}
-{#    <meta charset="UTF-8">#}
-{#    <title>Student Index</title>#}
-{#</head>#}
-{#<body>#}
-{#    <nav>#}
-{#        <ul>#}
-{#            <li><a href="/createClass/">Create Class</a></li>#}
-{#            <li><a href="/createCourse/">Create Course</a></li>#}
-{#            <li><a href="/addStudent/">Add Student</a></li>#}
-{#            <li><a href="/logout/">Logout</a></li>#}
-{#        </ul>#}
-{#    </nav>#}
-{#    {% block content %}#}
-{#        {% for course in courses %}#}
-{#            <table>#}
-{#                <tr><th><a href = "/courseForStudents/{{ course.3 }}">{{ course.0 }}</a></th></tr>#}
-{#                <tr><td>Student Name - {{ course.1 }}</td></tr>#}
-{#                <tr><td>Description - {{ course.2 }}</td></tr>#}
-{#            </table>#}
-{#        {% endfor %}#}
-{#    {% endblock %}#}
-{#</body>#}
-{#</html>#}
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>EDEZE </title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<head>
+  <title>EDEZE </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
 
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
-    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+  <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
 
-    <link rel="stylesheet" href="{% static 'css/jquery.fancybox.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/jquery.fancybox.min.css' %}">
 
-    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
 
-    <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
+  <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
 
-    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+  <link rel="stylesheet" href="{% static 'css/aos.css' %}">
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  </head>
-  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
   <div class="site-wrap">
 
@@ -71,13 +45,14 @@
 
       <div class="container-fluid">
         <div class="d-flex align-items-center">
-            <div class="site-logo mr-auto w-25"><a href="index.html"><span style="color: BLACK">EDEZE </span></a></div>
+          <div class="site-logo mr-auto w-25"><a href="/"><span style="color: BLACK">EDEZE </span></a></div>
 
           <div class="mx-auto text-center">
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
                 <li><a href="/login/" class="nav-link"><span style="color: BLACK">Home</span></a></li>
-                <li><a href="/progressAnalysis/" class="nav-link"><span style="color: BLACK">View Progress Analysis</span></a></li>
+                <li><a href="/progressAnalysis/" class="nav-link"><span style="color: BLACK">View Progress
+                      Analysis</span></a></li>
               </ul>
             </nav>
           </div>
@@ -88,14 +63,15 @@
                 <li class="cta"><a href="/logout/" class="nav-link"><span>Log out</span></a></li>
               </ul>
             </nav>
-            <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right"><span class="icon-menu h3"></span></a>
+            <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right"><span
+                class="icon-menu h3"></span></a>
           </div>
         </div>
       </div>
 
     </header>
-      {% block content %}
-      <div class="site-section courses-title" id="courses-section" style="position: relative;top: 40px;height: 1000px;">
+    {% block content %}
+    <div class="site-section courses-title" id="courses-section" style="position: relative;top: 40px;height: 1000px;">
       <div class="container">
         <div class="row mb-5 justify-content-center">
           <div class="col-lg-7 text-center" data-aos="fade-up" data-aos-delay="">
@@ -104,56 +80,68 @@
         </div>
       </div>
     </div>
-      <div class="site-section courses-entry-wrap"  data-aos="fade-up" data-aos-delay="100" style="position: relative;top: -550px">
+    <div class="site-section courses-entry-wrap" data-aos="fade-up" data-aos-delay="100"
+      style="position: relative;top: -550px">
       <div class="container">
         <div class="row">
-            {%  for course in courses %}
-                <div class="col-lg-4">
-                <div class="course bg-white h-100 align-self-stretch"> <div class="course-inner-text py-4 px-4">
-                    <span class="course-price">{{ course.1 }}</span>
-                    <h3><a href="/courseForStudents/{{ course.3 }}">{{ course.0 }}</a></h3>
-                    <p>Description:<br>{{ course.2 }}</p>
-                    <p><br><a href="/forum/{{ course.3 }}">Forum Link</a></p>
-                  </div>
-                </div>
-                </div>
-            {% endfor %}
+          {% for course in courses %}
+          <div class="col-lg-4">
+            <div class="course bg-white h-100 align-self-stretch">
+              <div class="course-inner-text py-4 px-4">
+                <span class="course-price">{{ course.1 }}</span>
+                <h3><a href="/courseForStudents/{{ course.3 }}">{{ course.0 }}</a></h3>
+                <p>Description:<br>{{ course.2 }}</p>
+                <p><br><a href="/forum/{{ course.3 }}">Forum Link</a></p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
         </div>
       </div>
-      </div>
-      {% endblock %}
-  {#    {% block content %}#}
-{#        {% for course in courses %}#}
-{#            <table>#}
-{#                <tr><th><a href = "/courseForStudents/{{ course.3 }}">{{ course.0 }}</a></th></tr>#}
-{#                <tr><td>Student Name - {{ course.1 }}</td></tr>#}
-{#                <tr><td>Description - {{ course.2 }}</td></tr>#}
-{#            </table>#}
-{#        {% endfor %}#}
-{#    {% endblock %}#}
-{#</body>#}
-{#</html>#}
+    </div>
+    {% endblock %}
+    {# {% block content %}#}
+    {# {% for course in courses %}#}
+    {# <table>#}
+      {# <tr>
+        <th><a href="/courseForStudents/{{ course.3 }}">{{ course.0 }}</a></th>
+      </tr>#}
+      {# <tr>
+        <td>Student Name - {{ course.1 }}</td>
+      </tr>#}
+      {# <tr>
+        <td>Description - {{ course.2 }}</td>
+      </tr>#}
+      {# </table>#}
+    {# {% endfor %}#}
+    {# {% endblock %}#}
+    {#
+</body>#}
+{#
+
+</html>#}
 
 
 
-  </div> <!-- .site-wrap -->
+</div> <!-- .site-wrap -->
 
-  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
-  <script src="{% static 'js/jquery-ui.js' %}"></script>
-  <script src="{% static 'js/popper.min.js' %}"></script>
-  <script src="{% static 'js/bootstrap.min.js' %}"></script>
-  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
-  <script src="{% static 'js/jquery.countdown.min.js' %}"></script>
-  <script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
-  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
-  <script src="{% static 'js/aos.js' %}"></script>
-  <script src="{% static 'js/jquery.fancybox.min.js' %}"></script>
-  <script src="{% static 'js/jquery.sticky.js' %}"></script>
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+<script src="{% static 'js/jquery-ui.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+<script src="{% static 'js/jquery.countdown.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
+<script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+<script src="{% static 'js/aos.js' %}"></script>
+<script src="{% static 'js/jquery.fancybox.min.js' %}"></script>
+<script src="{% static 'js/jquery.sticky.js' %}"></script>
 
 
-  <script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
 
-  </body>
+</body>
+
 </html>
