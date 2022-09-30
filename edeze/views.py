@@ -67,21 +67,36 @@ def progressAnalysis(request):
     student_id = request.session['student_id']
     con = DBConnection.getConnection()
     cur = con.cursor()
+    print(student_id)
     query = "select date_time ,total_marks ,sum(marks) from exam e inner join questions_students qs on qs.exam_id = e.id where qs.student_id = %s group by qs.exam_id"
     cur.execute(query, (student_id))
     resultset = cur.fetchall()
+    print(resultset)
     date_time = []
     score = []
-    # for r in resultset:
-    #     date_time.append(r[0].strftime("%Y-%m-%d %H:%M:%S"))
-    #     score.append(r[2]*100/r[1])
-    date_time = ["2015-03-15 13:34:23", "2015-03-25 13:24:20", "2015-04-25 14:12:00"]
-    score = [30,50,40]
+    for r in resultset:
+        date_time.append(r[0].strftime("%Y-%m-%d %H:%M:%S"))
+        if(r[2]!=None):
+            score.append(r[2]*100/r[1])
+        else:
+            score.append(0)
     date_time = json.dumps(date_time)
     score = json.dumps(score)
     print(date_time)
     print(score)
-    return render(request,'progressAnalysis.html',{'date_time':date_time, 'score':score})
+    query2="select name,sum(sum_marks),sum(total_marks) from ( select date_time ,total_marks ,sum(marks) as sum_marks,course_id from pariksha.exam as e inner join pariksha.questions_students as qs on qs.exam_id = e.id where qs.student_id = %s group by qs.exam_id ) as T inner join pariksha.course as c on T.course_id=c.id group by T.course_id"
+    cur.execute(query2, (student_id))
+    resultset2 = cur.fetchall()
+    course_labels = []
+    course_marks = []
+    for r in resultset2:
+        course_labels.append(r[0])
+        course_marks.append(r[1]*100/float(r[2]))
+    course_labels = json.dumps(course_labels)
+    course_marks = json.dumps(course_marks)
+    print(course_labels)
+    print(course_marks)
+    return render(request,'progressAnalysis.html',{'date_time':date_time, 'score':score,'course_labels':course_labels,'course_marks':course_marks})
 
 def analyticsForTeacher(request):
     return render(request, 'AnalyticsForTeacher.html')
