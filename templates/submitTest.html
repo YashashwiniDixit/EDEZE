@@ -40,6 +40,35 @@
       </div>
       <div class="site-mobile-menu-body"></div>
     </div>
+    <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner" style="background-color: #ffff;">
+
+      <div class="container-fluid">
+        <div class="d-flex align-items-center">
+          <div class="site-logo mr-auto w-25"><a href="/"><span style="color: BLACK">EDEZE </span></a></div>
+
+          <div class="mx-auto text-center">
+            <nav class="site-navigation position-relative text-right" role="navigation">
+              <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
+                <li><a href="/login/" class="nav-link"><span style="color: BLACK">Home</span></a></li>
+                <li><a href="/progressAnalysis/" class="nav-link"><span style="color: BLACK">View Progress
+                      Analysis</span></a></li>
+              </ul>
+            </nav>
+          </div>
+
+          <div class="ml-auto w-25">
+            <nav class="site-navigation position-relative text-right" role="navigation">
+              <ul class="site-menu main-menu site-menu-dark js-clone-nav mr-auto d-none d-lg-block m-0 p-0">
+                <li class="cta"><a href="/logout/" class="nav-link"><span>Log out</span></a></li>
+              </ul>
+            </nav>
+            <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right"><span
+                class="icon-menu h3"></span></a>
+          </div>
+        </div>
+      </div>
+
+    </header>
     {% block content %}
     <div class="intro-section" id="home-section">
 
@@ -53,6 +82,8 @@
                   <h1 style="color: #17a2b8" data-aos="fade-up" data-aos-delay="100">Your test was submitted
                     successfully</h1>
                   <p class="mb-4" data-aos="fade-up" data-aos-delay="200">The event was successful.</p>
+                  <button type="button" class="btn btn-primary" data-aos="fade-up" data-aos-delay="300"
+                    onclick="window.location.href='/login/'">Back to Home</button>
                 </div>
 
 
