@@ -1,25 +1,22 @@
 {% extends 'studentIndex.html' %}
 {% block content %}
-<script
-            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js">
 </script>
 
-</head>
-<body>
 
-<div style="position: relative;top:140px">
-    <canvas id="Knowledge_grammar" width="400" height="100"></canvas>
-</div>
-<div>
+<div style="padding:50px;">
+    <div style="position: relative;top:140px;background-color: white;">
+        <canvas id="Knowledge_grammar" width="300" height="100"></canvas>
+    </div>
 
-</div>
-<div style="position: relative;top:340px">
+    <div style="position: relative;top:250px;background-color: white;">
+        <canvas id="Course-Outcome" width="500" height="200"></canvas>
+    </div>
 
-    <canvas id="Course-Outcome" width="500" height="200"></canvas>
 </div>
 
 <script type="text/javascript">
-    var colorArray = ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850",
+    var colorArray = ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850",
         '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
         '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A',
         '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
@@ -48,15 +45,15 @@
 
         options: {
             title: {
-                fontSize:24,
+                fontSize: 24,
                 display: true,
                 text: 'Area Wise Analysis'
             }
         }
     });
-    {#var course_outcome_labels = ["FuzzyLogic","NeuralNetworks","NLP","Classifiers"];#}
+
     var course_outcome_labels = JSON.parse("{{c_out|escapejs}}");
-    {#var course_outcome_marks = [20,25,18,29];#}
+
     var course_outcome_marks = JSON.parse("{{mks_out|escapejs}}");
     var ctx2 = document.getElementById("Course-Outcome");
     var myChart = new Chart(ctx2, {
@@ -66,7 +63,7 @@
             datasets: [
                 {
                     label: "Marks",
-                    backgroundColor: colorArray.slice(0,course_outcome_labels.length),
+                    backgroundColor: colorArray.slice(0, course_outcome_labels.length),
                     data: course_outcome_marks
                 }
             ]
@@ -74,18 +71,18 @@
         options: {
             legend: {display: false},
             title: {
-                fontSize:24,
+                fontSize: 24,
                 display: true,
                 text: 'Course Outcome wise Analysis'
             },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
         }
-    }
     });
 
 </script>
