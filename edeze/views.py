@@ -60,9 +60,6 @@ def logout(request):
     return render(request,'login.html')
 
 
-
-
-
 def progressAnalysis(request):
     student_id = request.session['student_id']
     con = DBConnection.getConnection()
@@ -98,8 +95,57 @@ def progressAnalysis(request):
     print(course_marks)
     return render(request,'progressAnalysis.html',{'date_time':date_time, 'score':score,'course_labels':course_labels,'course_marks':course_marks})
 
-def analyticsForTeacher(request):
-    return render(request, 'AnalyticsForTeacher.html')
+def analyticsForTeacher(request,course_id):
+    if request.session.has_key('teacher_id'):
+        course = getCourse(course_id)
+        print(course)
+        con = DBConnection.getConnection()
+        cur = con.cursor()
+        query1 = "SELECT course_id,count(student_id) FROM pariksha.course_students where course_id=%s;"
+        cur.execute(query1, (course_id))
+        student_count = cur.fetchall()
+        print(student_count)
+        query2 = "SELECT course_id,id,date_time FROM pariksha.exam where course_id=%s;"
+        cur.execute(query2, (course_id))
+        exam_timeline = cur.fetchall()
+        exam_labels = []
+        exam_time = []
+        for e in exam_timeline:
+            exam_labels.append(1)
+            exam_time.append(e[2].strftime("%Y-%m-%d %H:%M:%S"))
+        exam_labels = json.dumps(exam_labels)
+        exam_time = json.dumps(exam_time)
+        print(exam_labels)
+        print(exam_time)
+        query3 = "SELECT course_id,id, start_date_time FROM pariksha.assignment where course_id=%s;"
+        cur.execute(query3, (course_id))
+        assignment_timeline = cur.fetchall()
+        assignment_labels = []
+        assignment_time = []
+        for a in assignment_timeline:
+            assignment_labels.append(1)
+            assignment_time.append(a[2].strftime("%Y-%m-%d %H:%M:%S"))
+        assignment_labels = json.dumps(assignment_labels)
+        assignment_time = json.dumps(assignment_time)
+        print(assignment_labels)
+        print(assignment_time)
+        query4 = "select exam_id,title, sum(marks) as marks, total_marks from pariksha.questions_students as qs inner join pariksha.exam as e on qs.exam_id=e.id where course_id=%s group by qs.exam_id;"
+        cur.execute(query4, (course_id))
+        exam_marks = cur.fetchall()
+        exam_labels = []
+        exam_percentage = []
+        for e in exam_marks:
+            exam_labels.append(e[1])
+            if(e[2]!=None):
+                exam_percentage.append(e[2]*100/(float(e[3])*(student_count[0][1])))
+            else:
+                exam_percentage.append(0)
+            
+        exam_labels = json.dumps(exam_labels)
+        exam_percentage = json.dumps(exam_percentage)
+        print(exam_labels)
+        print(exam_percentage)
+    return render(request, 'AnalyticsForTeacher.html',{'exam_labels':exam_labels,'exam_time':exam_time,'assignment_labels':assignment_labels,'assignment_time':assignment_time})
 
 def viewAnalysis(request,exam_id):
     student_id = request.session['student_id']

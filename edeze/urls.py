@@ -65,7 +65,7 @@ urlpatterns = [
     path('submitTest/<str:exam_id>',submitTest),
     path('progressAnalysis/',progressAnalysis),
     path('viewAnalysis/<str:exam_id>',viewAnalysis),
-    path('analyticsForTeacher/',analyticsForTeacher),
+    path('analyticsForTeacher/<str:course_id>',analyticsForTeacher),
 
     
 ]

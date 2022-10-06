@@ -9,22 +9,22 @@
 
 <body>
     <div>
-        <canvas id="Class_performance" width="400" height="100"></canvas>
+        <canvas id="No_of_students" width="400" height="100"></canvas>
     </div>
     <br><br>
     <hr>
     <div>
-        <canvas id="Course_outcome" width="200" height="50"></canvas>
+        <canvas id="Exam_timeline" width="200" height="50"></canvas>
     </div>
     <br><br>
     <hr>
     <div>
-        <canvas id="Course" width="200" height="50"></canvas>
+        <canvas id="Assignment_timeline" width="200" height="50"></canvas>
     </div>
     <br><br>
     <hr>
     <div>
-        <canvas id="Progress_of_class" width="200" height="60"></canvas>
+        <canvas id="Avg_exam_marks" width="200" height="60"></canvas>
     </div>
 
     <script type="text/javascript">
@@ -39,33 +39,47 @@
             '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3',
             '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
 
-        var ctx = document.getElementById("Class_performance");
-        var class_performance_labels = ['poor', 'average', 'good'];
-        var count_data = [30, 38, 42];
+        var ctx = document.getElementById("No_of_students")
+        var date_labels = JSON.parse("{{exam_time|escapejs}}");
+        var marks_data = JSON.parse("{{exam_labels|escapejs}}");
         var myChart = new Chart(ctx, {
-            type: 'doughnut',
+            type: 'line',
             data: {
-                labels: class_performance_labels,
+                labels: date_labels,
                 datasets: [
                     {
-                        label: "Student Count",
-                        data: count_data,
-                        backgroundColor: colorArray.slice(0, class_performance_labels.length),
+                        label: "Marks",
+                        data: marks_data,
+                        backgroundColor: colorArray[0],
+                        fill: false
                     }
                 ]
             },
 
             options: {
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Date Time'
+                        },
+                        type: 'time',
+                        time: {
+                            unit: 'month'
+                        }
+                    }],
+
+                },
                 title: {
                     fontSize: 24,
                     display: true,
-                    text: 'Class Performance Analysis'
+                    text: 'Exam Wise Progress Analysis'
                 }
             }
         });
         var course_labels = ["Maths", "Science", "English"];
         var course_avg_marks = [50, 60, 40];
-        var ctx2 = document.getElementById("Course");
+        var ctx2 = document.getElementById("Exam_timeline");
         var myChart = new Chart(ctx2, {
             type: 'doughnut',
             data: {
@@ -86,31 +100,46 @@
                 }
             }
         });
-        var course_outcome_labels = ["Fuzzy", "NLP", "Neural_Networks"];
-        var course_outcome_avg_marks = [50, 60, 40];
-        var ctx3 = document.getElementById("Course_outcome");
+        var ctx3 = document.getElementById("Assignment_timeline")
+        var date_labels = JSON.parse("{{assignment_time|escapejs}}");
+        var marks_data = JSON.parse("{{assignment_labels|escapejs}}");
         var myChart = new Chart(ctx3, {
-            type: 'pie',
+            type: 'line',
             data: {
-                labels: course_outcome_labels,
+                labels: date_labels,
                 datasets: [
                     {
                         label: "Marks",
-                        backgroundColor: colorArray.slice(0, course_labels.length),
-                        data: course_outcome_avg_marks
+                        data: marks_data,
+                        backgroundColor: colorArray[0],
+                        fill: false
                     }
                 ]
             },
+
             options: {
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Date Time'
+                        },
+                        type: 'time',
+                        time: {
+                            unit: 'month'
+                        }
+                    }],
+
+                },
                 title: {
                     fontSize: 24,
                     display: true,
-                    text: 'Course Outcome Wise Marks Analysis'
+                    text: 'Exam Wise Progress Analysis'
                 }
             }
         });
 
-        new Chart(document.getElementById("Progress_of_class"), {
+        new Chart(document.getElementById("Avg_exam_marks"), {
             type: 'line',
             data: {
                 labels: ["2015-03-15 13:34:23", "2015-03-25 13:24:20", "2015-04-25 14:12:00"],
