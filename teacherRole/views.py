@@ -282,10 +282,6 @@ def giveAccess(request,course_id):
     return render(request,'giveAccess.html',{'classes':classes,'course_id':course_id})
 
 
-
-
-
-
 def forum(request,course_id):
     if request.method == 'POST':
         message = request.POST.get('message')
