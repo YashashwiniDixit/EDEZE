@@ -104,7 +104,11 @@ def analyticsForTeacher(request,course_id):
         query1 = "SELECT course_id,count(student_id) FROM pariksha.course_students where course_id=%s;"
         cur.execute(query1, (course_id))
         student_count = cur.fetchall()
+        student_c = []
+        student_c.append(student_count[0][1])
+        student_count = student_c
         print(student_count)
+
         query2 = "SELECT course_id,id,date_time FROM pariksha.exam where course_id=%s;"
         cur.execute(query2, (course_id))
         exam_timeline = cur.fetchall()
@@ -132,20 +136,21 @@ def analyticsForTeacher(request,course_id):
         query4 = "select exam_id,title, sum(marks) as marks, total_marks from pariksha.questions_students as qs inner join pariksha.exam as e on qs.exam_id=e.id where course_id=%s group by qs.exam_id;"
         cur.execute(query4, (course_id))
         exam_marks = cur.fetchall()
-        exam_labels = []
+        exam_name = []
         exam_percentage = []
         for e in exam_marks:
-            exam_labels.append(e[1])
+            exam_name.append(e[1])
             if(e[2]!=None):
-                exam_percentage.append(e[2]*100/(float(e[3])*(student_count[0][1])))
+                exam_percentage.append(e[2]*100/(float(e[3])*student_count[0]))
             else:
                 exam_percentage.append(0)
             
-        exam_labels = json.dumps(exam_labels)
+        exam_name = json.dumps(exam_name)
         exam_percentage = json.dumps(exam_percentage)
-        print(exam_labels)
+        student_count = json.dumps(student_count)
+        print(exam_name)
         print(exam_percentage)
-    return render(request, 'AnalyticsForTeacher.html',{'exam_labels':exam_labels,'exam_time':exam_time,'assignment_labels':assignment_labels,'assignment_time':assignment_time})
+    return render(request, 'AnalyticsForTeacher.html',{'student_count':student_count,'exam_labels':exam_labels,'exam_time':exam_time,'assignment_labels':assignment_labels,'assignment_time':assignment_time,'exam_name':exam_name,'exam_percentage':exam_percentage})
 
 def viewAnalysis(request,exam_id):
     student_id = request.session['student_id']
