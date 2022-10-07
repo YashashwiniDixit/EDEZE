@@ -1,30 +1,31 @@
-<!DOCTYPE html>
-<html>
+{% extends "teacherIndex.html" %}
+{% block content %}
 
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js">
     </script>
-
 </head>
 
 <body>
     <div>
-        <canvas id="No_of_students" width="400" height="100"></canvas>
-    </div>
-    <br><br>
-    <hr>
-    <div>
-        <canvas id="Exam_timeline" width="200" height="50"></canvas>
-    </div>
-    <br><br>
-    <hr>
-    <div>
-        <canvas id="Assignment_timeline" width="200" height="50"></canvas>
-    </div>
-    <br><br>
-    <hr>
-    <div>
-        <canvas id="Avg_exam_marks" width="200" height="60"></canvas>
+        <div style="position: relative;top:140px;background-color: white;">
+            <canvas id="No_of_students" width="auto" height="auto"></canvas>
+        </div>
+        <br><br>
+        <hr>
+        <div style="position: relative;top:240px;background-color: white;">
+            <canvas id="Exam_timeline" width="auto" height="auto"></canvas>
+        </div>
+        <br><br>
+        <hr>
+        <div style="position: relative;top:340px;background-color: white;">
+            <canvas id="Assignment_timeline" width="auto" height="auto"></canvas>
+        </div>
+        <br><br>
+        <hr>
+        <div style="position: relative;top:440px;background-color: white;">
+            <canvas id="Avg_exam_marks" width="autp" height="auto"></canvas>
+        </div>
     </div>
 
     <script type="text/javascript">
@@ -39,67 +40,6 @@
             '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3',
             '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
 
-        var ctx = document.getElementById("No_of_students")
-        var date_labels = JSON.parse("{{exam_time|escapejs}}");
-        var marks_data = JSON.parse("{{exam_labels|escapejs}}");
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: date_labels,
-                datasets: [
-                    {
-                        label: "Marks",
-                        data: marks_data,
-                        backgroundColor: colorArray[0],
-                        fill: false
-                    }
-                ]
-            },
-
-            options: {
-                scales: {
-                    xAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Date Time'
-                        },
-                        type: 'time',
-                        time: {
-                            unit: 'month'
-                        }
-                    }],
-
-                },
-                title: {
-                    fontSize: 24,
-                    display: true,
-                    text: 'Exam Wise Progress Analysis'
-                }
-            }
-        });
-        var course_labels = ["Maths", "Science", "English"];
-        var course_avg_marks = [50, 60, 40];
-        var ctx2 = document.getElementById("Exam_timeline");
-        var myChart = new Chart(ctx2, {
-            type: 'doughnut',
-            data: {
-                labels: course_labels,
-                datasets: [
-                    {
-                        label: "Marks",
-                        backgroundColor: colorArray.slice(0, course_labels.length),
-                        data: course_avg_marks
-                    }
-                ]
-            },
-            options: {
-                title: {
-                    fontSize: 24,
-                    display: true,
-                    text: 'Course Wise Marks Analysis'
-                }
-            }
-        });
         var ctx3 = document.getElementById("Assignment_timeline")
         var date_labels = JSON.parse("{{assignment_time|escapejs}}");
         var marks_data = JSON.parse("{{assignment_labels|escapejs}}");
@@ -109,7 +49,46 @@
                 labels: date_labels,
                 datasets: [
                     {
-                        label: "Marks",
+                        label: "Presence of Assignment",
+                        data: marks_data,
+                        backgroundColor: colorArray[0],
+                        fill: false
+                    }
+                ]
+            },
+
+            options: {
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Date Time'
+                        },
+                        type: 'time',
+                        time: {
+                            unit: 'day'
+                        }
+                    }],
+
+                },
+                title: {
+                    fontSize: 24,
+                    display: true,
+                    text: 'Assignment Distribution'
+                }
+            }
+        });
+
+        var ctx = document.getElementById("Exam_timeline")
+        var date_labels = JSON.parse("{{exam_time|escapejs}}");
+        var marks_data = JSON.parse("{{exam_labels|escapejs}}");
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: date_labels,
+                datasets: [
+                    {
+                        label: "Presence of Exam",
                         data: marks_data,
                         backgroundColor: colorArray[0],
                         fill: false
@@ -134,61 +113,82 @@
                 title: {
                     fontSize: 24,
                     display: true,
-                    text: 'Exam Wise Progress Analysis'
+                    text: 'Exam Distribution'
                 }
             }
         });
 
-        new Chart(document.getElementById("Avg_exam_marks"), {
-            type: 'line',
+        var course_labels = JSON.parse("{{exam_name | escapejs}}");
+        var course_marks = JSON.parse("{{exam_percentage|escapejs}}");
+
+        var ctx2 = document.getElementById("Avg_exam_marks");
+        var myChart = new Chart(ctx2, {
+            type: 'horizontalBar',
             data: {
-                labels: ["2015-03-15 13:34:23", "2015-03-25 13:24:20", "2015-04-25 14:12:00"],
-                datasets: [{
-                    data: [86, 114, 106],
-                    label: "TE Comps",
-                    borderColor: "#3e95cd",
-                    fill: false
-                }, {
-                    data: [282, 350, 411],
-                    label: "TE IT",
-                    borderColor: "#8e5ea2",
-                    fill: false
-                }, {
-                    data: [168, 170, 178],
-                    label: "TE EXTC",
-                    borderColor: "#3cba9f",
-                    fill: false
-                }, {
-                    data: [40, 20, 10],
-                    label: "SY MCA",
-                    borderColor: "#e8c3b9",
-                    fill: false
-                }, {
-                    data: [6, 3, 2],
-                    label: "TE ETRX",
-                    borderColor: "#c45850",
-                    fill: false
+                labels: course_labels,
+                datasets: [
+                    {
+                        label: "Marks",
+                        backgroundColor: colorArray.slice(0, course_labels.length),
+                        data: course_marks
+                    }
+                ]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    fontSize: 24,
+                    display: true,
+                    text: 'Average Percentage in Exams'
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Percentage'
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Exam Name'
+                        }
+                    }]
                 }
+            }
+        });
+
+
+
+        var ctx4 = document.getElementById("No_of_students");
+        var KG_marks = JSON.parse("{{student_count|escapejs}}");
+        console.log(KG_marks);
+        var myChart = new Chart(ctx4, {
+            type: 'doughnut',
+            data: {
+                labels: ["Student", "Teacher"],
+                datasets: [
+                    {
+                        label: "User Count",
+                        data: KG_marks,
+                        backgroundColor: ["#3e95cd", "#8e5ea2"],
+                    }
                 ]
             },
 
             options: {
-                scales: {
-                    xAxes: [{
-                        type: 'time'
-                    }]
-                },
                 title: {
                     fontSize: 24,
                     display: true,
-                    text: 'Progress of each class with time'
+                    text: 'User Count'
                 }
             }
         });
 
 
     </script>
-
 </body>
-
-</html>
+{% endblock %}
