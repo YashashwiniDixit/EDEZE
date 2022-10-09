@@ -12,7 +12,7 @@ Below are some of the features offered:
 - Personalized feedbacks and analytics after exams.
 - Assignment facility available for practice.
 - Mock exam also available for practice.
-- Google enhanced search also available within for learning purposes.
+- Google enhanced search also available within for learning purposes and assignments.
 
 ## Setup
 
